@@ -23,20 +23,20 @@ Week 1:
   []  TEST
 
 Week 2:
-    Get basic HTML laid out
-    Get basic login set up, clean up pages
-    Get login and logout working and linked
-    Set up accounts
-    TEST
+  []  Get basic HTML laid out
+  []  Get basic login set up, clean up pages
+  []  Get login and logout working and linked
+  []  Set up accounts
+  []  TEST
 
 
 Break:
-    Play with CSS
+  [] Meditate
 
 Week 3:
-    TEST
-    Polish, troubleshoot, etc
-    TEST
+  []  TEST
+  []  Troubleshoot, clean code, etc...
+  []  TEST
 ```
 ===========================================
 
@@ -46,7 +46,7 @@ What is the primary function of the web application?
 ```
 Bridging the gap between employers and contractors.
 User can post resumes/qualification and apply for work.
-Businesses can post jobs for last minute fills, i.e sick call, no call/no show.
+Businesses can post for last minute fills jobs in the service industry, i.e sick call, no call/no show.
 ```
 What problem is it attempting to solve?
 ```
