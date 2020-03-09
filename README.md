@@ -69,13 +69,13 @@ Employers function:
 
 ## DATA MODEL
 
-Users
+- Users
   - Employer/Contractor
-JobPost
+- JobPost
   - EmployerID
   - Title
   - Description
   - StartDatetime
-ContractorRating
+- ContractorRating
   - JobPostID
   - ContractorID (which contractor this was for)
