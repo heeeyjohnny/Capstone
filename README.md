@@ -1,17 +1,8 @@
-# CAPSTONE
+# CAPSTONE NAME
 
-
-# NAME -- ?????
-
-===========================================
 
 # SCHEDULE
 
-Done:
-```
-Set up repository
-Set up Django project
-```
 
 To do:
 ```
@@ -20,25 +11,26 @@ Week 1:
   [x]  Start new Django project
   []  Start app, get basics
   []  Outline function/roadmap
-  []  TEST
+  []  Create the JobPost model and some dummy user accounts
+  []  Show a list of JobPosts and allow the user to search them
 
 Week 2:
   []  Get basic HTML laid out
-  []  Get basic login set up, clean up pages
-  []  Get login and logout working and linked
-  []  Set up accounts
-  []  TEST
+  []  Define user model (employer/contractor)
+  []  register, login, logout
+  []  Allow employers to create JobPosts
+  []  Allow contractors to respond to JobPosts
 
 
 Break:
-  [] Meditate
+  [] Have some fun
 
 Week 3:
-  []  TEST
-  []  Troubleshoot, clean code, etc...
+  []  Allow employers to create ContractorRatings
+  []  Troubleshoot, clean code, style, etc...
   []  TEST
 ```
-===========================================
+
 
 # PROJECT OVERVIEW
 
@@ -53,7 +45,7 @@ What problem is it attempting to solve?
 Business owners/service industry searching for last minute work coverage.
 Kitchen workers/Cooks, Host/Hostess, Bartenders, Food Handlers Card/OLCC.
 ```
-===========================================
+
 
 # FUNCTIONALITY
 
@@ -74,17 +66,16 @@ Employers function:
     Rate hired contractor.
 
 ```
-How will their actions correspond to events on the back-end?
-```
-Post/Get request on for job info.
-User models
-```
-===========================================
 
-# DATA MODEL
-```
-Users
-Employers
-Job Post
-Rating System
-```
+## DATA MODEL
+
+- Users
+  - Employer/Contractor
+JobPost
+  - EmployerID
+  - Title
+  - Description
+  - StartDatetime
+ContractorRating
+  - JobPostID
+  - ContractorID (which contractor this was for)
