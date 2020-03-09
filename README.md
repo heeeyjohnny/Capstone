@@ -16,25 +16,25 @@ Set up Django project
 To do:
 ```
 Week 1:
-    Set up repository
-    Start new Django project
-    Start app, get basics
-    Outline function/roadmap
-    Test
+  [x]  Set up repository
+  [x]  Start new Django project
+  []  Start app, get basics
+  []  Outline function/roadmap
+  []  TEST
 
 Week 2:
     Get basic HTML laid out
     Get basic login set up, clean up pages
     Get login and logout working and linked
     Set up accounts
-    Test
+    TEST
 
 
 Break:
     Play with CSS
 
 Week 3:
-    Test
+    TEST
     Polish, troubleshoot, etc
     TEST
 ```
