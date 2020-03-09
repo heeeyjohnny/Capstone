@@ -69,7 +69,7 @@ Employers function:
 
 ## DATA MODEL
 
-- Users
+Users
   - Employer/Contractor
 JobPost
   - EmployerID
