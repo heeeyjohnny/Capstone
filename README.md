@@ -11,10 +11,6 @@ Done:
 ```
 Set up repository
 Set up Django project
-Set up Djano app, link basic pages
-Create superuser
-Get basic login set up, clean up pages
-Get login and logout working and linked
 ```
 
 To do:
@@ -24,17 +20,23 @@ Week 1:
     Start new Django project
     Start app, get basics
     Outline function/roadmap
+    Test
 
 Week 2:
     Get basic HTML laid out
-    Set up test accounts
+    Get basic login set up, clean up pages
+    Get login and logout working and linked
+    Set up accounts
+    Test
 
 
 Break:
     Play with CSS
 
 Week 3:
+    Test
     Polish, troubleshoot, etc
+    TEST
 ```
 ===========================================
 
@@ -42,7 +44,8 @@ Week 3:
 
 What is the primary function of the web application?
 ```
-User can post resumes, apply for work.
+Bridging the gap between employers and contractors.
+User can post resumes/qualification and apply for work.
 Businesses can post jobs for last minute fills, i.e sick call, no call/no show.
 ```
 What problem is it attempting to solve?
@@ -82,5 +85,6 @@ User models
 ```
 Users
 Employers
-Job post
+Job Post
+Rating System
 ```
