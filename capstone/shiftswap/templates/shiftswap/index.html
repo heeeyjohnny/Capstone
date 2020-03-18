@@ -1,125 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>SHIFTswap</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-<link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
-</head>
-<style type="text/css">
-  .box {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    flex-direction: row;
-    padding: 20px;
-    margin: 0 auto;
-  }
-  .card {
-    width: 25%;
-    text-align: left;
-  }
-  .card-footer {
-    text-align: right;
-  }
-</style>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Welcome</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">POST</a>
-          </li>
-          <li class="nav-item">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModal">
-              Register
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Page Content -->
-  <div class="container">
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Register</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form action="{% url 'shiftswap:register' %}" method="POST">
-              {% csrf_token %}
-              <div class="form-group">
-                <input type="text" placeholder="Username" name="username">
-                <input type="email" name="email" placeholder="Email">
-              </div>
-              <div class="form-group">
-                <input type="password" name="password" placeholder="Password">
-
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="is_contractor" checked>
-                  <label class="form-check-label" for="inlineRadio1">Contractor</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="is_employer">
-                  <label class="form-check-label" for="inlineRadio2">Employer</label>
-                </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Register</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Jumbotron Header -->
-    <header class="jumbotron my-4">
-      <!-- Search form -->
-
-      <div class="row">
-        <form>
-          <div class="col-md-7">
-            <input type="text" class="form-control" id="inputCity" placeholder=">> job description">
-          </div>
-          <div class="col-md-4">
-            <input type="text" class="form-control" id="inputCity" placeholder=">> location">
-          </div>
-          <div class="col-md-1">
-            <button class="btn btn-outline-success float-right" type="submit">Search</button>
-          </div>
-        </form>
-      </div>
-    </header>
-
+{% extends 'base.html' %}
+{% block content %}
 
     <!-- Page Features -->
 
@@ -139,7 +19,7 @@
             </p>
           </div>
           <div class="card-footer">
-            <a href="#" type="button" class="btn btn-info btn-secondary btn-sm">Apply</a>
+            <a href="{% url 'shiftswap:apply' %}" type="button" class="btn btn-info btn-secondary btn-sm">Apply</a>
           </div>
         </div>
         {% endfor %}
@@ -147,26 +27,4 @@
       </div>
     </div>
 
-
-
-  <!-- /.row -->
-
-  </div>
-  <!-- /.container -->
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Shifty Swappy 2020</p>
-    </div>
-    <!-- /.container -->
-  </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-</body>
-
-</html>
+{% endblock %}
