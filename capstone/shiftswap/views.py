@@ -26,13 +26,13 @@ def register(request):
     is_employer = request.POST['inlineRadioOptions']
     is_contractor = request.POST['inlineRadioOptions']
     if request.POST['inlineRadioOptions'] == 'is_employer':
-        register = User.objects.create_user(username=username, email=email, password=password, is_staff=True, is_employer=True) #is_employer or is_contractor=True
+        user = User.objects.create_user(username=username, email=email, password=password, is_staff=True, is_employer=True) #is_employer or is_contractor=True
+        user.save()
     else:
-        register = User.objects.create_user(username=username, email=email, password=password, is_staff=True, is_contractor=True)
+        user = User.objects.create_user(username=username, email=email, password=password, is_staff=True, is_contractor=True)
+        user.save()
 
     # User.objects.create_user(username, email, password)
-    print(request.POST)
-    print(register)
     return HttpResponseRedirect(reverse('shiftswap:index'))
 
 
@@ -79,6 +79,13 @@ def apply(request):
 @login_required
 def profile(request):
     if request.user.is_authenticated:
-        return HttpResponse('User profile')
+        current_user = request.user
+        print('>>>>>>>>>>>>>')
+        print(current_user.username)
+        print(current_user.email)
+        print(current_user.id)
+        context = {
+        }
+        return render(request, 'shiftswap/profile.html', context)
     else:
         return HttpResponseRedirect(reverse('shiftswap:index'))
