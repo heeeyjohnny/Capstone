@@ -47,10 +47,14 @@
           </li>
 
           <li class="nav-item">
-            {% if user.is_employer or user.is_superuser %}
-            <a class="nav-link" href="{% url 'shiftswap:post' %}">Post</a>
+            {% if request.user.is_authenticated %}
+              {% if request.user.is_employer or request.user.is_superuser %}
+                <a class="nav-link" href="{% url 'shiftswap:post' %}">Post Profile</a>
+                {% else %}
+                <a class="nav-link" href="{% url 'shiftswap:profile' %}">User Profile</a>
+              {% endif %}
             {% else %}
-            <a class="nav-link" href="{% url 'shiftswap:login_user' %}">Profile</a>
+            <a class="nav-link" href="{% url 'shiftswap:apply' %}">Profile</a>
             {% endif %}
           </li>
 

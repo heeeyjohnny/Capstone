@@ -23,9 +23,15 @@ def register(request):
     username = request.POST['username']
     email = request.POST['email']
     password = request.POST['password']
+    is_employer = request.POST['inlineRadioOptions']
+    is_contractor = request.POST['inlineRadioOptions']
+    if request.POST['inlineRadioOptions'] == 'is_employer':
+        register = User.objects.create_user(username=username, email=email, password=password, is_staff=True, is_employer=True) #is_employer or is_contractor=True
+    else:
+        register = User.objects.create_user(username=username, email=email, password=password, is_staff=True, is_contractor=True)
+
     # User.objects.create_user(username, email, password)
     print(request.POST)
-    # register = User.objects.create_user(username=username, email=email, password=password) #is_employer or is_contractor=True
     print(register)
     return HttpResponseRedirect(reverse('shiftswap:index'))
 
@@ -48,6 +54,7 @@ def login_user(request):
         login(request, user)
         return HttpResponseRedirect(reverse('shiftswap:index'))
     else:
+
         return HttpResponse('error')
 
 
@@ -68,3 +75,10 @@ def apply(request):
         return HttpResponse('ok')
     else:
         return HttpResponseRedirect(reverse('shiftswap:login_user'))
+
+@login_required
+def profile(request):
+    if request.user.is_authenticated:
+        return HttpResponse('User profile')
+    else:
+        return HttpResponseRedirect(reverse('shiftswap:index'))
