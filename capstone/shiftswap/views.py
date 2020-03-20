@@ -8,13 +8,22 @@ import json
 
 # Create your views here.
 def index(request):
+    data = JobCard.objects.order_by('date')
     # opening json data file
-    with open('/Users/johnnyphompadith/Desktop/CODE/Capstone/capstone/shiftswap/MOCK_DATA.json') as f:
-        data = json.load(f)
-    # print(data)
-    jobs = JobCard.objects.all()
+    ## loaded a mock json with data info, parsed and then save to database
+    # with open('capstone/shiftswap/MOCK_DATA.json') as f:
+    #     data = json.load(f)
+    # for x in data:
+    #     company = x['company']
+    #     type = x['type']
+    #     date = x['date']
+    #     start_time = x['start_time']
+    #     end_time = x['end_time']
+    #     pay = x['pay']
+    #     logo = x['logo']
+    #     post = JobCard(employer=User(id=3,company=company), type=type, date=date, start_time=start_time, end_time=end_time, pay=pay, description=logo)
+    #     post.save()
     context = {
-    'jobs': jobs,
     'data': data,
     }
     return render(request, 'shiftswap/index.html', context)
@@ -49,13 +58,12 @@ def login_user(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(request, username=username, password=password)
-    print(request.POST)
+    # print(request.POST)
     if user is not None:
         login(request, user)
         return HttpResponseRedirect(reverse('shiftswap:index'))
     else:
-
-        return HttpResponse('error')
+        return HttpResponseRedirect(reverse('shiftswap:login_user'))
 
 
 def logout_user(request):
@@ -65,14 +73,17 @@ def logout_user(request):
 @login_required
 def post(request):
     if request.user.is_employer or request.user.is_superuser:
-        return HttpResponse('ok')
+        current_user = request.user
+        context = {
+        }
+        return render(request, 'shiftswap/post.html', context)
     else:
-        return HttpResponse('No')
+        return HttpResponseRedirect(reverse('shiftswap:index'))
 
 @login_required
 def apply(request):
     if request.user.is_authenticated:
-        return HttpResponse('ok')
+        return HttpResponse('Apply page/Job info page')
     else:
         return HttpResponseRedirect(reverse('shiftswap:login_user'))
 
@@ -80,10 +91,11 @@ def apply(request):
 def profile(request):
     if request.user.is_authenticated:
         current_user = request.user
-        print('>>>>>>>>>>>>>')
-        print(current_user.username)
-        print(current_user.email)
-        print(current_user.id)
+        # print('>>>>>>>>>>>>>')
+        # print(current_user.__dict__)
+        # print(current_user.username)
+        # print(current_user.email)
+        # print(current_user.id)
         context = {
         }
         return render(request, 'shiftswap/profile.html', context)
