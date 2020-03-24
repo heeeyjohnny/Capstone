@@ -11,7 +11,7 @@ def index(request):
     data = JobCard.objects.order_by('date')
     # opening json data file
     ## loaded a mock json with data info, parsed and then save to database
-    # with open('capstone/shiftswap/MOCK_DATA.json') as f:
+    # with open('/Users/johnnyphompadith/Desktop/CODE/Capstone/capstone/shiftswap/MOCK_DATA.json') as f:
     #     data = json.load(f)
     # for x in data:
     #     company = x['company']
@@ -40,7 +40,7 @@ def register(request):
     else:
         user = User.objects.create_user(username=username, email=email, password=password, is_staff=True, is_contractor=True)
         user.save()
-
+    login(request, user)
     # User.objects.create_user(username, email, password)
     return HttpResponseRedirect(reverse('shiftswap:index'))
 
