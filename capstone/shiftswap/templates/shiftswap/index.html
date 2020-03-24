@@ -11,14 +11,16 @@
           <div class="card-body">
             <h4 class="card-title">{{job.type}}</h4>
             <p class="card-text">
-              Business: {{job.company}}<br />
-              Date: {{job.date}}<br />
-              From: {{job.start_time}} to {{job.end_time}}<br />
-              Pay: ${{job.pay}}
+              <!-- job.employer.company pulling info from JobCard employer field, to foriegnkey of User of employer/company field -->
+              Business: {{job.employer.company}}<br/>
+              Date: {{job.date}}<br/>
+              From: {{job.start_time}} to {{job.end_time}}<br/>
+              Pay: ${{job.pay}}<br/>
+              ID: {{job.id}}
             </p>
           </div>
           <div class="card-footer">
-            <a href="{% url 'shiftswap:apply' %}" type="button" class="btn btn-info btn-secondary btn-sm">Apply</a>
+            <a href="{% url 'shiftswap:apply' job.id %}" type="button" class="btn btn-info btn-secondary btn-sm">Apply</a>
           </div>
         </div>
         {% endfor %}

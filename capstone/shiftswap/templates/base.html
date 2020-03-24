@@ -13,6 +13,11 @@
   <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
 </head>
 <style type="text/css">
+  .container-main {
+    padding-top: 100px;
+    padding-bottom: 60px;
+    margin: 0 auto;
+  }
   .box {
     display: flex;
     flex-wrap: wrap;
@@ -29,6 +34,16 @@
 
   .card-footer {
     text-align: right;
+  }
+
+  footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2.9rem;
+    color: white;
+    text-align: center;
   }
 </style>
 
@@ -126,24 +141,7 @@
       </div>
     </div>
 
-    <!-- Jumbotron Header -->
-    <header class="jumbotron my-4">
-      <!-- Search form -->
-
-      <div class="row">
-        <form>
-          <div class="col-md-7">
-            <input type="text" class="form-control" id="inputCity" placeholder=">> job description">
-          </div>
-          <div class="col-md-4">
-            <input type="text" class="form-control" id="inputCity" placeholder=">> location">
-          </div>
-          <div class="col-md-1">
-            <button class="btn btn-outline-success float-right" type="submit">Search</button>
-          </div>
-        </form>
-      </div>
-    </header>
+<div class="container-main">
 
 
     <!-- Page Features -->
@@ -158,10 +156,14 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
+  <footer class="footer fixed-bottom navbar-dark bg-dark">
     <div class="container">
+      <p>
+        <a href="http://www.facebook.com"><img src="https://img.icons8.com/color/48/000000/facebook-new.png"/></a>
+        <a href="http://www.instagram.com"><img src="https://img.icons8.com/color/48/000000/instagram-new.png"/></a>
+        <a href="http://www.twitter.com"><img src="https://img.icons8.com/color/48/000000/twitter.png"/></a>
+      </p>
 
-      <p class="m-0 text-center text-white" text-align="right">Copyright &copy; Shifty Swappy 2020</p>
     </div>
     <!-- /.container -->
   </footer>

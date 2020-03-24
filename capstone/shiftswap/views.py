@@ -81,9 +81,14 @@ def post(request):
         return HttpResponseRedirect(reverse('shiftswap:index'))
 
 @login_required
-def apply(request):
+def apply(request, id):
     if request.user.is_authenticated:
-        return HttpResponse('Apply page/Job info page')
+        if request.method == 'GET':
+            job = JobCard.objects.get(id=id)
+            context = {
+            'job': job,
+            }
+        return render(request, 'shiftswap/apply.html', context)
     else:
         return HttpResponseRedirect(reverse('shiftswap:login_user'))
 
