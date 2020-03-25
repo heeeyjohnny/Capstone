@@ -3,12 +3,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import User, JobCard
+from datetime import date, datetime, timedelta
 import json
 
 
 # Create your views here.
 def index(request):
-    data = JobCard.objects.order_by('date')
+    data = JobCard.objects.order_by('-date')
+    user = User.objects.all()
     # opening json data file
     ## loaded a mock json with data info, parsed and then save to database
     # with open('/Users/johnnyphompadith/Desktop/CODE/Capstone/capstone/shiftswap/MOCK_DATA.json') as f:
@@ -25,6 +27,7 @@ def index(request):
     #     post.save()
     context = {
     'data': data,
+    'user': user,
     }
     return render(request, 'shiftswap/index.html', context)
 
@@ -85,10 +88,16 @@ def apply(request, id):
     if request.user.is_authenticated:
         if request.method == 'GET':
             job = JobCard.objects.get(id=id)
+            user = User.objects.all()
+            now = datetime.now()
+            dt = datetime.combine(job.date, datetime.min.time())
+            job_posted_date = dt - now
             context = {
             'job': job,
+            'job_posted_date': job_posted_date,
+            'user': user,
             }
-        return render(request, 'shiftswap/apply.html', context)
+        return render(request, 'shiftswap/jobinfo.html', context)
     else:
         return HttpResponseRedirect(reverse('shiftswap:login_user'))
 

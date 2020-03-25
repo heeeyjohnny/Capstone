@@ -6,6 +6,7 @@ class User(AbstractUser):
     is_employer = models.BooleanField(default=False)
     company = models.CharField(max_length=200)
     company_location = models.CharField(max_length=150)
+    
 
     def __str__(self):
         return self.username
@@ -13,7 +14,7 @@ class User(AbstractUser):
 
 class JobCard(models.Model):
     type = models.CharField(max_length=200)
-    employer = models.ForeignKey(User, on_delete=models.PROTECT, related_name='jobcard_location')
+    employer = models.ForeignKey(User, on_delete=models.PROTECT, related_name='user_company')
     description = models.CharField(max_length=400, blank=True)
     date = models.DateField(null=True, blank=True, default=None)
     start_time = models.TimeField(default=None)

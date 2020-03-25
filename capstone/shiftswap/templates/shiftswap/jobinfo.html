@@ -2,9 +2,28 @@
 {% block content %}
 
 
-{% for job in jobs %}
-{{job}}
-{% endfor %}
+
+<div class="card border-dark w-100 text-center">
+  <div class="card-header">
+    JOB POSTING ID: {{job.id}}
+  </div>
+  <div class="card-body">
+
+    <h5 class="card-title">{{job.type}}</h5>
+    <p class="card-text text-left">
+      Business: {{job.employer.company}}<br/>
+      Job Type: {{job.type}}<br/>
+      Date: {{job.date}}<br/>
+      From: {{job.start_time}} to {{job.end_time}}<br/>
+      Pay: ${{job.pay}}<br/>
+      ID: {{job.id}}</p>
+    <a href="{% url 'shiftswap:index' %}" class="btn btn-primary btn-sm">Cancel</a>
+    <a href="" class="btn btn-primary btn-sm">Apply</a>
+  </div>
+  <div class="card-footer text-muted">
+    Posted: {{job_posted_date}} ago.
+  </div>
+</div>
 
 
 {% endblock %}
