@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import User, JobCard
 from datetime import date, datetime, timedelta
 import json
@@ -11,6 +12,16 @@ import json
 def index(request):
     data = JobCard.objects.order_by('-date')
     user = User.objects.all()
+    job_list = JobCard.objects.get_queryset().order_by('id')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(job_list, 8)
+    try:
+        jobs = paginator.page(page)
+    except PageNotAnInteger:
+        jobs = paginator.page(1)
+    except EmptyPage:
+        jobs = paginator.page(paginator.num_pages)
     # opening json data file
     ## loaded a mock json with data info, parsed and then save to database
     # with open('/Users/johnnyphompadith/Desktop/CODE/Capstone/capstone/shiftswap/MOCK_DATA.json') as f:
@@ -25,9 +36,11 @@ def index(request):
     #     logo = x['logo']
     #     post = JobCard(employer=User(id=3,company=company), type=type, date=date, start_time=start_time, end_time=end_time, pay=pay, description=logo)
     #     post.save()
+
     context = {
     'data': data,
     'user': user,
+    'jobs': jobs,
     }
     return render(request, 'shiftswap/index.html', context)
 
@@ -91,7 +104,7 @@ def apply(request, id):
             user = User.objects.all()
             now = datetime.now()
             dt = datetime.combine(job.date, datetime.min.time())
-            job_posted_date = dt - now
+            job_posted_date = now - dt
             context = {
             'job': job,
             'job_posted_date': job_posted_date,
