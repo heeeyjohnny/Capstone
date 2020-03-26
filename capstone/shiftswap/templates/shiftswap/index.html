@@ -1,73 +1,64 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <!-- Page Features -->
+<!-- Page Features -->
 
-    <div class="text-center">
-      <div class="box">
-        {% for job in jobs %}
-        <div class="card h-100">
-          <img class="card-img-top" src="https://picsum.photos/200/300?random={{job.pay}}" width="130" height="130" alt="">
-          <div class="card-body">
-            <h4 class="card-title">{{job.type}}</h4>
-            <p class="card-text">
-              <!-- job.employer.company pulling info from JobCard employer field, to foriegnkey of User of employer/company field -->
-              Business: {{job.employer.company}}<br/>
-              Date: {{job.date}}<br/>
-              From: {{job.start_time}} to {{job.end_time}}<br/>
-              Pay: ${{job.pay}}<br/>
-              ID: {{job.id}}
-            </p>
-          </div>
-          <div class="card-footer">
-            <a href="{% url 'shiftswap:apply' job.id %}" type="button" class="btn btn-info btn-secondary btn-sm">Apply</a>
-          </div>
-        </div>
-        {% endfor %}
+<div class="text-center">
+  <div class="box">
+    {% for job in jobs %}
+    <div class="card h-100">
+      <img class="card-img-top" src="https://picsum.photos/200/300?random={{job.pay}}" width="130" height="130" alt="">
+      <div class="card-body">
+        <h4 class="card-title">{{job.type}}</h4>
+        <p class="card-text">
+          <!-- job.employer.company pulling info from JobCard employer field, to foriegnkey of User of employer/company field -->
+          Business: {{job.employer.company}}<br />
+          Date: {{job.date}}<br />
+          From: {{job.start_time}} to {{job.end_time}}<br />
+          Pay: ${{job.pay}}<br />
+          ID: {{job.id}}
+        </p>
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'shiftswap:apply' job.id %}" type="button" class="btn btn-info btn-secondary btn-sm">Apply</a>
       </div>
     </div>
-    <div class="d-flex justify-content-center">
+    {% endfor %}
+  </div>
+</div>
+<div class="d-flex justify-content-center">
 
-    </div>
+</div>
 
 
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        {% if jobs.has_other_pages %}
-          <ul class="pagination">
-            {% if jobs.has_previous %}
-              <li><a href="?page={{ jobs.previous_page_number }}">&laquo;</a></li>
-            {% else %}
-              <li class="disabled"><span>&laquo;</span></li>
-            {% endif %}
-            {% for i in jobs.paginator.page_range %}
-              {% if jobs.number == i %}
-                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-              {% else %}
-                <li><a href="?page={{ i }}">{{ i }}</a></li>
-              {% endif %}
-            {% endfor %}
-            {% if jobs.has_next %}
-              <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
-            {% else %}
-              <li class="disabled"><span>&raquo;</span></li>
-            {% endif %}
-          </ul>
-        {% endif %}
-      </ul>
-    </nav>
+<nav aria-label="Page navigation example">
 
-    <nav aria-label="Page navigation example">
+</nav>
+
+<nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
+    {% if jobs.has_other_pages %}
+    {% if jobs.has_previous %}
+    <li class="page-link" href="#" tabindex="-1"><a class="page-item disabled" href="?page={{ jobs.previous_page_number }}">Previous</a></li>
+    {% else %}
+    <li class="page-item disabled"><span class="page-link">Previous</span></li>
+    {% endif %}
+    {% for i in jobs.paginator.page_range %}
+    {% if jobs.number == i %}
+    <li class="page-item active">
+      <span class="page-link">{{i}}
+        <span class="sr-only">(current)</span>
+      </span></li>
+    {% else %}
+    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+    {% endfor %}
+    {% if jobs.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ jobs.next_page_number }}">Next</a></li>
+    {% else %}
+    <li class="page-item disabled"><span class="page-link">Next</span></li>
+    {% endif %}
+    {% endif %}
   </ul>
 </nav>
 
