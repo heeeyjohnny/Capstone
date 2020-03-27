@@ -7,8 +7,9 @@ from .models import User, JobCard
 from datetime import date, datetime, timedelta
 import json
 
-
 # Create your views here.
+
+
 def index(request):
     data = JobCard.objects.order_by('-date')
     user = User.objects.all()
@@ -36,7 +37,8 @@ def index(request):
     #     logo = x['logo']
     #     post = JobCard(employer=User(id=3,company=company), type=type, date=date, start_time=start_time, end_time=end_time, pay=pay, description=logo)
     #     post.save()
-
+    print('page number >>>>')
+    print(page)
     context = {
     'data': data,
     'user': user,
@@ -95,6 +97,7 @@ def post(request):
         return render(request, 'shiftswap/post.html', context)
     else:
         return HttpResponseRedirect(reverse('shiftswap:index'))
+
 
 @login_required
 def apply(request, id):
