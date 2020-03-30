@@ -6,7 +6,6 @@ class User(AbstractUser):
     is_employer = models.BooleanField(default=False)
     company = models.CharField(max_length=200)
     company_location = models.CharField(max_length=150)
-    
 
     def __str__(self):
         return self.username
