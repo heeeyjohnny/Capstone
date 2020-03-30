@@ -44,7 +44,7 @@
     color: white;
     text-align: center;
   }
-  
+
 </style>
 
 <body>
@@ -67,11 +67,7 @@
 
           <li class="nav-item">
             {% if request.user.is_authenticated %}
-            {% if request.user.is_employer or request.user.is_superuser %}
-            <a class="nav-link" href="{% url 'shiftswap:post' %}">Post Profile</a>
-            {% else %}
-            <a class="nav-link" href="{% url 'shiftswap:profile' %}">User Profile</a>
-            {% endif %}
+            <a class="nav-link" href="{% url 'shiftswap:profile' %}">Profile</a>
             {% else %}
             <a class="nav-link" href="{% url 'shiftswap:apply' %}">Profile</a>
             {% endif %}

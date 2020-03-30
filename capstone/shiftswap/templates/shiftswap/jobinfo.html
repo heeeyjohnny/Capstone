@@ -16,10 +16,15 @@
       Date: {{job.date}}<br/>
       From: {{job.start_time}} to {{job.end_time}}<br/>
       Pay: ${{job.pay}}<br/>
-      ID: {{job.id}}</p>
+      ID: {{job.id}}<br/><br/>
+      <b>WHO APPLIED:</b> <br>
+          {% for who in job.applied.all %}
+          {{ who }}<br/>
+          {% endfor %}
+    </p>
       {{page}}
     <a href="{% url 'shiftswap:index' %}" class="btn btn-primary btn-sm">Cancel</a>
-    <a href="" class="btn btn-primary btn-sm">Apply</a>
+    <a href="{% url 'shiftswap:applyjob' job.id %}" class="btn btn-primary btn-sm">Apply</a>
   </div>
   <div class="card-footer text-muted">
     Posted: {{job_posted_date}} ago.

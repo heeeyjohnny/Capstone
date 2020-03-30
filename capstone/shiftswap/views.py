@@ -37,8 +37,6 @@ def index(request):
     #     logo = x['logo']
     #     post = JobCard(employer=User(id=3,company=company), type=type, date=date, start_time=start_time, end_time=end_time, pay=pay, description=logo)
     #     post.save()
-    print('page number >>>>')
-    print(page)
     context = {
     'data': data,
     'user': user,
@@ -98,6 +96,18 @@ def post(request):
     else:
         return HttpResponseRedirect(reverse('shiftswap:index'))
 
+@login_required
+def applyjob(request, id):
+    if request.method == 'GET':
+        user = request.user.id
+        job = JobCard.objects.get(id=id)
+        job.applied.add(request.user)
+        # in jobinfo page, when click apply, sends request through applyjob views with jobid, if request.method is get, pull id out
+        # testing prints
+        # print('>>>>')
+        # print(job.id)
+        # print(request.user.id)
+    return HttpResponseRedirect(reverse('shiftswap:index'))
 
 @login_required
 def apply(request, id):

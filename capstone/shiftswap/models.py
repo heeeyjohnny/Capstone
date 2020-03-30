@@ -19,6 +19,8 @@ class JobCard(models.Model):
     start_time = models.TimeField(default=None)
     end_time = models.TimeField(default=None)
     pay = models.FloatField(default=0.00)
+    review = models.CharField(max_length=400, blank=True)
+    applied = models.ManyToManyField(User, related_name='applied')
 
     def __str__(self):
         return self.type
