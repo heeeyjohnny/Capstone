@@ -131,12 +131,15 @@ def apply(request, id):
 def profile(request):
     if request.user.is_authenticated:
         current_user = request.user
+        # searches for all jobs applied for by requested user.
+        lookingup = JobCard.objects.filter(applied=request.user)
         # print('>>>>>>>>>>>>>')
         # print(current_user.__dict__)
         # print(current_user.username)
         # print(current_user.email)
         # print(current_user.id)
         context = {
+        'lookingup': lookingup,
         }
         return render(request, 'shiftswap/profile.html', context)
     else:
