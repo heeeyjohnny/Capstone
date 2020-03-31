@@ -2,11 +2,19 @@
 {% block content %}
 
 <div class="container">
- <h5>PROFILE PAGE</h5>
+ <h5><span>PROFILE PAGE</span><span style="float:right">
+   {% if request.user.is_employer or request.user.is_superuser%}
+   <a href="{% url 'shiftswap:post' %}" alt="Post Job">
+   <img src="https://img.icons8.com/windows/48/000000/add-property.png"/></a>
+   {% else %}
+   <img src="https://img.icons8.com/windows/48/000000/add-property.png"/>
+   {% endif %}
+ </span></h5>
  <br/>
  <div class="row">
    <div class="col-sm-5">
-     <p>USER: <br/><br/>
+     <p>
+       <strong>USER:</strong> <br/><br/>
        Name: {{user.get_username}}<br/>
        Email: {{user.email}}<br/>
 
@@ -15,7 +23,7 @@
 
    <div class="col-sm-4">
       <ul style="list-style-type:none">
-        SOMETHING SOMETHING: <br/><br/>
+        <strong>REVIEW COLUMN:</strong> <br/><br/>
         {% for info in lookingup %}
        <li>{{info}} ({{info.id}})
        </li>
@@ -25,7 +33,12 @@
 
    <div class="col-sm-3">
       <ul style="list-style-type:none">
-        JOB LIST: <br/><br/>
+        {% if request.user.is_superuser or request.user.is_employer %}
+        <strong>POSTED JOBS:</strong>
+        {% else %}
+        <strong>APPLIED JOBS:</strong>
+        {% endif %}
+        <br/><br/>
         {% for info in lookingup %}
        <li>{{info}} ({{info.id}})
        </li>
