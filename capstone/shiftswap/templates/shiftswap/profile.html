@@ -24,25 +24,32 @@
    <div class="col-sm-4">
       <ul style="list-style-type:none">
         <strong>REVIEW COLUMN:</strong> <br/><br/>
-        {% for info in lookingup %}
-       <li>{{info}} ({{info.id}})
-       </li>
-       {% endfor %}
+        <li></li>
      </ul>
    </div>
 
    <div class="col-sm-3">
       <ul style="list-style-type:none">
         {% if request.user.is_superuser or request.user.is_employer %}
-        <strong>POSTED JOBS:</strong>
+        <strong>POSTED JOBS:</strong><br/><br/>
+          {% for pjob in postedjobs %}
+            <li><span><a href="{% url 'shiftswap:edit' pjob.id %}"><img src="https://img.icons8.com/officexs/26/000000/edit.png"/></a></span>
+              <span>{{pjob}}</span></li>
+          {% endfor %}
+            <br/><br/>
+            <strong>APPLIED JOBS:</strong><br/><br/>
+              {% for info in lookingup %}
+              <li>{{info}} ({{info.id}})
+              </li>
+              {% endfor %}
         {% else %}
-        <strong>APPLIED JOBS:</strong>
+        <strong>APPLIED JOBS:</strong><br/><br/>
+          {% for info in lookingup %}
+          <li>{{info}} ({{info.id}})
+          </li>
+          {% endfor %}
         {% endif %}
-        <br/><br/>
-        {% for info in lookingup %}
-       <li>{{info}} ({{info.id}})
-       </li>
-       {% endfor %}
+
      </ul>
    </div>
 

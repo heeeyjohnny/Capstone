@@ -14,4 +14,7 @@ urlpatterns = [
   path('logout_user/', views.logout_user, name='logout'),
   path('profile/', views.profile, name='profile'),
   path('applyjob/<int:id>', views.applyjob, name='applyjob'),
+  path('postjob/', views.postjob, name='postjob'),
+  path('edit/<int:id>', views.edit, name='edit'),
+  path('edit/', views.edit, name='edit'),
 ]

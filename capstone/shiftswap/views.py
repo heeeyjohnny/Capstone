@@ -13,7 +13,7 @@ import json
 def index(request):
     data = JobCard.objects.order_by('-date')
     user = User.objects.all()
-    job_list = JobCard.objects.get_queryset().order_by('id')
+    job_list = JobCard.objects.get_queryset().order_by('-date')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(job_list, 8)
@@ -86,6 +86,18 @@ def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('shiftswap:index'))
 
+def postjob(request):
+    print(request.POST)
+    jobs = JobCard.objects.all()
+    type = request.POST['type']
+    pay = request.POST['pay']
+    date = request.POST['date']
+    start_time = request.POST['start_time']
+    end_time = request.POST['end_time']
+    postingjob = JobCard.objects.create(type=type, employer=request.user, pay=pay, date=date, start_time=start_time, end_time=end_time)
+    return HttpResponseRedirect(reverse('shiftswap:index'))
+
+
 @login_required
 def post(request):
     if request.user.is_employer or request.user.is_superuser:
@@ -117,7 +129,7 @@ def apply(request, id):
             user = User.objects.all()
             now = datetime.now()
             dt = datetime.combine(job.date, datetime.min.time())
-            job_posted_date = now - dt
+            job_posted_date = dt - now
             context = {
             'job': job,
             'job_posted_date': job_posted_date,
@@ -128,10 +140,30 @@ def apply(request, id):
         return HttpResponseRedirect(reverse('shiftswap:login_user'))
 
 @login_required
+def edit(request, id):
+    if request.user.is_authenticated:
+        editjob = JobCard.objects.get(id=id)
+        editdate = editjob.date
+        d = datetime.strftime(editdate, '%m/%d/%Y')
+        print(d)
+        print('>>>>')
+        print(editjob.date)
+        print(editjob.start_time)
+        context = {
+        'd': d,
+        'editjob': editjob,
+        }
+        return render(request, 'shiftswap/edit.html', context)
+    else:
+        return HttpResponseRedirect(reverse('shiftswap:login_user'))
+
+
+@login_required
 def profile(request):
     if request.user.is_authenticated:
         current_user = request.user
         # searches for all jobs applied for by requested user.
+        postedjobs = JobCard.objects.filter(employer=request.user)
         lookingup = JobCard.objects.filter(applied=request.user)
         # print('>>>>>>>>>>>>>')
         # print(current_user.__dict__)
@@ -139,6 +171,7 @@ def profile(request):
         # print(current_user.email)
         # print(current_user.id)
         context = {
+        'postedjobs': postedjobs,
         'lookingup': lookingup,
         }
         return render(request, 'shiftswap/profile.html', context)
