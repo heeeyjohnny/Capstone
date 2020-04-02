@@ -143,14 +143,7 @@ def apply(request, id):
 def edit(request, id):
     if request.user.is_authenticated:
         editjob = JobCard.objects.get(id=id)
-        editdate = editjob.date
-        d = datetime.strftime(editdate, '%m/%d/%Y')
-        print(d)
-        print('>>>>')
-        print(editjob.date)
-        print(editjob.start_time)
         context = {
-        'd': d,
         'editjob': editjob,
         }
         return render(request, 'shiftswap/edit.html', context)

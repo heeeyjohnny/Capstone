@@ -58,6 +58,15 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
+          <li class="nav-item">
+            <!-- Button trigger modal -->
+            {% if request.user.is_authenticated %}
+            {% else %}
+            <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModal">
+              Register
+            </button>
+            {% endif %}
+          </li>
         </ul>
       </div>
 
@@ -65,6 +74,44 @@
   </nav>
 
   <!-- Page Content -->
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'shiftswap:register' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" placeholder="Username" name="username">
+              <input type="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Password">
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="is_contractor" checked>
+                <label class="form-check-label" for="inlineRadio1">Contractor</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="is_employer">
+                <label class="form-check-label" for="inlineRadio2">Employer</label>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Jumbotron Header -->
   <header class="jumbotron my-4">

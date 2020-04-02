@@ -2,59 +2,59 @@
 {% block content %}
 
 <div class="container">
- <h5><span>PROFILE PAGE</span><span style="float:right">
-   {% if request.user.is_employer or request.user.is_superuser%}
-   <a href="{% url 'shiftswap:post' %}" alt="Post Job">
-   <img src="https://img.icons8.com/windows/48/000000/add-property.png"/></a>
-   {% else %}
-   <img src="https://img.icons8.com/windows/48/000000/add-property.png"/>
-   {% endif %}
- </span></h5>
- <br/>
- <div class="row">
-   <div class="col-sm-5">
-     <p>
-       <strong>USER:</strong> <br/><br/>
-       Name: {{user.get_username}}<br/>
-       Email: {{user.email}}<br/>
+  <h5><span>PROFILE PAGE</span><span style="float:right">
+      {% if request.user.is_employer or request.user.is_superuser%}
+      <a href="{% url 'shiftswap:post' %}" alt="Post Job">
+        <img src="https://img.icons8.com/windows/48/000000/add-property.png" /></a>
+      {% else %}
+      <img src="https://img.icons8.com/windows/48/000000/add-property.png" />
+      {% endif %}
+    </span></h5>
+  <br />
+  <div class="row">
+    <div class="col-sm-5">
+      <p>
+        <strong>USER:</strong> <br /><br />
+        Name: {{user.get_username}}<br />
+        Email: {{user.email}}<br />
 
-     </p>
-   </div>
+      </p>
+    </div>
 
-   <div class="col-sm-4">
+    <div class="col-sm-4">
       <ul style="list-style-type:none">
-        <strong>REVIEW COLUMN:</strong> <br/><br/>
+        <strong>REVIEW COLUMN:</strong> <br /><br />
         <li></li>
-     </ul>
-   </div>
+      </ul>
+    </div>
 
-   <div class="col-sm-3">
+    <div class="col-sm-3">
       <ul style="list-style-type:none">
         {% if request.user.is_superuser or request.user.is_employer %}
-        <strong>POSTED JOBS:</strong><br/><br/>
-          {% for pjob in postedjobs %}
-            <li><span><a href="{% url 'shiftswap:edit' pjob.id %}"><img src="https://img.icons8.com/officexs/26/000000/edit.png"/></a></span>
-              <span>{{pjob}}</span></li>
-          {% endfor %}
-            <br/><br/>
-            <strong>APPLIED JOBS:</strong><br/><br/>
-              {% for info in lookingup %}
-              <li>{{info}} ({{info.id}})
-              </li>
-              {% endfor %}
+        <strong>POSTED JOBS:</strong><br /><br />
+        {% for pjob in postedjobs %}
+        <li><span><a href="{% url 'shiftswap:edit' pjob.id %}"><img src="https://img.icons8.com/officexs/26/000000/edit.png" /></a></span>
+          <span>{{pjob}}</span></li>
+        {% endfor %}
+        <br /><br />
+        <strong>APPLIED JOBS:</strong><br /><br />
+        {% for info in lookingup %}
+        <li>{{info}} ({{info.id}})
+        </li>
+        {% endfor %}
         {% else %}
-        <strong>APPLIED JOBS:</strong><br/><br/>
-          {% for info in lookingup %}
-          <li>{{info}} ({{info.id}})
-          </li>
-          {% endfor %}
+        <strong>APPLIED JOBS:</strong><br /><br />
+        {% for info in lookingup %}
+        <li>{{info}} ({{info.id}})
+        </li>
+        {% endfor %}
         {% endif %}
 
-     </ul>
-   </div>
+      </ul>
+    </div>
 
 
- </div>
+  </div>
 </div>
 
 

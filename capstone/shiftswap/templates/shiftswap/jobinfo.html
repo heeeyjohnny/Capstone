@@ -11,18 +11,18 @@
 
     <h5 class="card-title">{{job.type}}</h5>
     <p class="card-text text-left">
-      Business: {{job.employer.company}}<br/>
-      Job Type: {{job.type}}<br/>
-      Date: {{job.date}}<br/>
-      From: {{job.start_time}} to {{job.end_time}}<br/>
-      Pay: ${{job.pay}}<br/>
-      ID: {{job.id}}<br/><br/>
+      Business: {{job.employer.company}}<br />
+      Job Type: {{job.type}}<br />
+      Date: {{job.date}}<br />
+      From: {{job.start_time}} to {{job.end_time}}<br />
+      Pay: ${{job.pay}}<br />
+      ID: {{job.id}}<br /><br />
       <b>WHO APPLIED:</b> <br>
-          {% for who in job.applied.all %}
-          {{ who }}<br/>
-          {% endfor %}
+      {% for who in job.applied.all %}
+      {{ who }}<br />
+      {% endfor %}
     </p>
-      {{page}}
+    {{page}}
     <a href="{% url 'shiftswap:index' %}" class="btn btn-primary btn-sm">Cancel</a>
     <a href="{% url 'shiftswap:applyjob' job.id %}" class="btn btn-primary btn-sm">Apply</a>
   </div>
