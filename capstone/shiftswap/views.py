@@ -7,8 +7,6 @@ from .models import User, JobCard
 from datetime import date, datetime, timedelta
 import json
 
-# Create your views here.
-
 
 def index(request):
     data = JobCard.objects.order_by('-date')
