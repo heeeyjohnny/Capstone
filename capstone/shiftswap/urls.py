@@ -17,4 +17,5 @@ urlpatterns = [
   path('postjob/', views.postjob, name='postjob'),
   path('edit/<int:id>', views.edit, name='edit'),
   path('edit/', views.edit, name='edit'),
+  path('helloworld/', views.hello, name='hello'),
 ]

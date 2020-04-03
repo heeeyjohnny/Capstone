@@ -23,7 +23,7 @@ def index(request):
         jobs = paginator.page(paginator.num_pages)
     # opening json data file
     ## loaded a mock json with data info, parsed and then save to database
-    # with open('/Users/johnnyphompadith/Desktop/CODE/Capstone/capstone/shiftswap/MOCK_DATA.json') as f:
+    # with open('Capstone/capstone/shiftswap/MOCK_DATA.json') as f:
     #     data = json.load(f)
     # for x in data:
     #     company = x['company']
@@ -166,5 +166,12 @@ def profile(request):
         'lookingup': lookingup,
         }
         return render(request, 'shiftswap/profile.html', context)
+    else:
+        return HttpResponseRedirect(reverse('shiftswap:index'))
+
+@login_required
+def hello(request):
+    if request.user.is_superuser:
+        return render(request, 'shiftswap/hello.html')
     else:
         return HttpResponseRedirect(reverse('shiftswap:index'))
